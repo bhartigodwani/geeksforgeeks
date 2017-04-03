@@ -16,7 +16,8 @@ class Stack
 		pushS(10);
 		pushS(20);
 		pushS(30);
-    
+    		
+		System.out.println("stack after operations");
 		for(int i=top; i>=0; i--) 
 			System.out.println(stack[i]); // stack after all operation
  	}
