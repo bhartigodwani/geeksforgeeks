@@ -31,7 +31,7 @@ public class Array5 {
 		System.out.println(total);
 		int result = total - sum ;
 		System.out.println("result = "+result);
-		
+		 
 		/*for (int i = 0; i < arr.length; i++) {
 			arr[i] = sc.nextInt();
 			count[arr[i]]++;
