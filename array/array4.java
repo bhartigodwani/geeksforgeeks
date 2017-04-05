@@ -34,6 +34,6 @@ public class Array4 {
 			}
 		}
 		
-		System.out.println("result max array sum = "+resultMaxSubarray);
+		 System.out.println("result max array sum = "+resultMaxSubarray);
 	}
 }
