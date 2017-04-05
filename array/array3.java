@@ -31,7 +31,7 @@ public class Array3 {
 			System.out.println(result);
 			result = result ^ arr[i];
 		}
-		System.out.println("\n"+result);
+		System.out.println("\n"+ result);
 		
     /*for (int i = 0; i < arr.length; i++) {
 			arr[i] = sc.nextInt();
