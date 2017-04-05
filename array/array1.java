@@ -48,7 +48,7 @@ public class Array1 {
 				if (array[i] <= x) {
 					for (int j = i+1; j < array.length; j++) {
 						if(array[j] == (x - array[i])){
-							System.out.println(array[i]+":"+array[j]);
+							System.out.println(array[i]+" : "+array[j]);
 						}
 					}
 				}
