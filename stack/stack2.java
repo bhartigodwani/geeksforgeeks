@@ -1,3 +1,4 @@
+/*reverse string using stack*/
 import java.util.Scanner;
 class ReverseStack{
     public static void main (String[] args) {
