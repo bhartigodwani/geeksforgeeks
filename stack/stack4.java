@@ -1,61 +1,68 @@
+/*
+Check for balanced parentheses in an expression
+Given an expression string exp , write a program to examine whether the pairs and the orders of 
+“{“,”}”,”(“,”)”,”[“,”]” are correct in exp. For example, the program should print true for exp = “[()]{}{[()()]()}” 
+and false for exp = “[(])”
+*/
+
 import java.util.Scanner;
 class Stack{
-    static int top1 = -1, top2, maxSize;
-    static int stack[];
+    static int top = -1, maxSize;
+    static char stack[];
     
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter the expression :");
         String str = sc.next();
         char ch[] = str.toCharArray();
-        
+        stack = new char[ch.length];
+        boolean flag = true;
         for (int i=0; i<ch.length; i++){
+        
             if (ch[i] == '{' || ch[i] == '(' || ch[i] == '[')
                 pushInStack(ch[i]);
-            if (ch[i] == '}' || ch[i] == ')' || ch[i] == ']')
-                checkBalance(ch[i]);
+        
+            if (ch[i] == '}' || ch[i] == ')' || ch[i] == ']'){
+                flag = checkBalance(ch[i]);
+            }
+                
+            if(flag == false){
+                System.out.println("unbalanced");
+                break;
+            }
         } 
         
-        System.out.println("stack 1 after all the operation :");
-        for(int i=top1; i>=0; i--){
-            System.out.println(twoStackArray[i]+ "  ");
-        }
-        
-        
-        System.out.println("\nstack 2 after all the operation :");
-        for(int i=top2; i<size; i++){
-            System.out.println(twoStackArray[i]+ "  ");
-        }
-        
+        if(flag == true)
+            System.out.println("balanced");
     }
     
-    public static void pushInStack1(int value){
-        top1++;
-        if (top1 == maxSize){
-            System.out.println("twoStackArray is full");
-        } 
+    public static void pushInStack(char symbol){
+        top++;
+        stack[top] = symbol;
+    }
+    
+    public static boolean checkBalance(char symbol){
+        
+        if (top >= 0){ 
+            if((symbol == ')' && stack[top] == '(') || (symbol == '}' && stack[top] == '{') || (symbol == ']' && stack[top] == '[')){
+                popStack();
+                return true;
+            }
+        }
+        
         else{
-            twoStackArray[top1] = value;            
+            return false;
         }
-
+    return false;
     }
     
-    public static void pushInStack2(int value){
-        top2--;
-        if(top2 == top1){
-            System.out.println("twoStackArray is full");
+    public static boolean popStack(){
+        if(top < 0){
+            return false;
         }
         else{
-            twoStackArray[top2] = value;            
+            top--;    
+            return true;
         }
     }
-    
-    public static void popStack1(){
-        if(top1 >= 0)
-            top1--;
-            System.out.println("twoStackArray is empty");
-    }
-    
-    
-    
 }
