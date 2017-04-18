@@ -13,15 +13,18 @@ Implementation of twoStack should be space efficient.
 
 import java.util.Scanner;
 class Stack{
-    static int top1 = -1, top2;
+    static int top1 = -1, top2, size;
     static int twoStackArray[] ;
     
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter 2stack array size:");
-        int size = sc.nextInt();
+        size = sc.nextInt();
         twoStackArray = new int[size]; 
         top2 = size;
+        
+        popStack1(); //pop empty stack
+        popStack2(); //pop empty stack
         pushInStack1(1); // push in stack 1
         pushInStack1(2);
         pushInStack1(3);
@@ -50,19 +53,38 @@ class Stack{
     
     public static void pushInStack1(int value){
         top1++;
-        twoStackArray[top1] = value;
+        if (top1 == top2){
+            System.out.println("twoStackArray is full");
+        } 
+        else{
+            twoStackArray[top1] = value;            
+        }
+
     }
     
     public static void pushInStack2(int value){
         top2--;
-        twoStackArray[top2] = value;
+        if(top2 == top1){
+            System.out.println("twoStackArray is full");
+        }
+        else{
+            twoStackArray[top2] = value;            
+        }
     }
     
     public static void popStack1(){
-        top1--;
+        if(top1 >= 0){
+            top1--;
+        }
+        else{
+            System.out.println("stack1 is empty");
+        }
     }
     
     public static void popStack2(){
-        top2++;
-    }
+        if (top2 < size) 
+            top2++;
+        else    
+            System.out.println("stack2 is empty");
+    }   
 }
