@@ -7,11 +7,15 @@ The function should not use any of the arithmetic operators.
 */
 class Solution{
     public static void main (String[] args) {
-        int x=100;
+        int x=-100;
         int y=1;
-        boolean result = ((x^y)<0);//Xor is negative if their signs are opposite 
-        if (result == true) 
-            System.out.println("signs are opposit");
+        boolean result1 = ((x^y)<0);//Xor is negative if their signs are opposite 
+        boolean result2 = (x < 0)? (y >= 0): (y < 0);
+        int result3 = ((x ^ y) >> 31);
+        //System.out.println(result3);
+        
+        if (result1 == true && result2 == true && result3 == -1) 
+            System.out.println("signs are opposite");
         else
             System.out.println("signs are same");
     }
