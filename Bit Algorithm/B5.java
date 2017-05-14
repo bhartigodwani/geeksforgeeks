@@ -9,7 +9,10 @@ class Solution{
     public static void main (String[] args) {
         int x=100;
         int y=1;
-        boolean result = ((x^y)<0);//Xor is negative if their signs are different 
-        System.out.println("result = "+result);
+        boolean result = ((x^y)<0);//Xor is negative if their signs are opposite 
+        if (result == true) 
+            System.out.println("signs are opposit");
+        else
+            System.out.println("signs are same");
     }
 }
