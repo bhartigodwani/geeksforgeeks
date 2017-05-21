@@ -32,7 +32,7 @@ public class Array1 {
 			else if (array[l] + array[r] < x){
 				l++;
 				System.out.println("l");
-			}
+			} 
 			else{
 				r--;
 				System.out.println("l");
