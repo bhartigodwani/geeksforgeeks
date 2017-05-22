@@ -32,23 +32,5 @@ public class Array3 {
 			result = result ^ arr[i];
 		}
 		System.out.println("\n"+ result);
-		
-    /*for (int i = 0; i < arr.length; i++) {
-			arr[i] = sc.nextInt();
-			temp[arr[i]]++;
-		}
-		
-		for (int j = 0; j < 10; j++) {
-			if (temp[j] % 2 == 1) {
-				System.out.println("output - "+j);
-				flag = 1;
-				break;
-			}
-		}
-		
-	  
-		if (flag == 0) {
-			System.out.println("no odd found");
-		}*/
 	}
 }
