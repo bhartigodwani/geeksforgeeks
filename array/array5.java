@@ -10,8 +10,8 @@ Example:
 I/P    1 2 4 6 3 7 8
 O/P    5
 
-Solution 1 = count if any of the number is missing
-Solution 2 = (count sum of all numbers from 1 to n) - (count of given numbers)*/
+Solution 1 = (count sum of all numbers from 1 to n) - (count of given numbers)
+Solution 2 = ((xor(1 to n)) xor (xor(given all elements))*/
 
 public class Array5 {
 	public static void main(String[] args) {
