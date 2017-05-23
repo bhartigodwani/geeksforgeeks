@@ -10,6 +10,18 @@
 
 // This is a "method-only" submission. 
 
+/*
+  Insert Node at the beginning of a linked list 
+  head pointer input could be NULL as well for empty list
+  Node is defined as 
+  class Node {
+     int data;
+     Node next;
+  }
+*/
+
+// This is a "method-only" submission. 
+
 class LinkedList{
     static Node head;
     
@@ -36,10 +48,45 @@ class LinkedList{
         }
         System.out.println("null");
         
+        /*deletion at front*/
+        deleteAtFront();
+        System.out.println("\nLinkedList after deletion at front:");
+        traversePtr = head;
+        while(traversePtr != null){
+            System.out.print(traversePtr.data+" --> ");
+            traversePtr = traversePtr.link;
+        }
+        System.out.println("null\n");
+        
+        /*deletion at end*/
+        deleteAtEnd();
+        System.out.println("LinkedList after deletion at end:");
+        traversePtr = head;
+        while(traversePtr != null){
+            System.out.print(traversePtr.data+" --> ");
+            traversePtr = traversePtr.link;
+        }
+        System.out.println("null\n");
+        
+        
+        /*deletion at given position*/
+        int position = 2;
+        deleteAtGivenPosition(position);
+        System.out.println("position to be deleted = "+position);
+        System.out.println("LinkedList after deletion at given position:");
+        traversePtr = head;
+        while(traversePtr != null){
+            System.out.print(traversePtr.data+" --> ");
+            traversePtr = traversePtr.link;
+        }
+        System.out.println("null\n");
+        
+        /*deletion of a node given a key*/
+        
         /*insertion at front*/
         int valueToBeInsertedAtFront = 5;
         insertAtFront(valueToBeInsertedAtFront);
-        System.out.println("\nvalueToBeInsertedAtFront is = "+valueToBeInsertedAtFront);
+        System.out.println("valueToBeInsertedAtFront is = "+valueToBeInsertedAtFront);
         System.out.println("LinkedList after insertion at front:");
         traversePtr = head;
         while(traversePtr != null){
@@ -50,7 +97,7 @@ class LinkedList{
         
         /*insertion at end*/
         int valueToBeInsertedAtEnd = 6;
-        System.out.println("\nvalueToBeInsertedAtEnd is = "+valueToBeInsertedAtEnd);
+        System.out.println("valueToBeInsertedAtEnd is = "+valueToBeInsertedAtEnd);
         insertAtEnd(valueToBeInsertedAtEnd);
         System.out.println("LinkedList after insertion at end:");
         traversePtr = head;
@@ -61,9 +108,9 @@ class LinkedList{
         System.out.println("null\n");
         
         /*insertion at given position*/
-        int position = 4;
+        position = 4;
         int valueToBeInsertedAtPosition = 7;
-        System.out.println("\nposition = "+position+"  valueToBeInsertedAtPosition is = "+valueToBeInsertedAtPosition);
+        System.out.println("position = "+position+"  valueToBeInsertedAtPosition is = "+valueToBeInsertedAtPosition);
         insertAtPosition(position , valueToBeInsertedAtPosition);
         System.out.println("LinkedList after insertion at given position:");
         traversePtr = head;
@@ -83,6 +130,27 @@ class LinkedList{
             ptr = ptr.link;
         }
     }
+    
+    static void deleteAtFront(){
+        head = head.link;
+    }
+    
+    static void deleteAtEnd(){
+        Node ptr = head;
+        while(ptr.link.link != null)
+            ptr = ptr.link;
+        
+        ptr.link = null;
+    }
+    
+    static void deleteAtGivenPosition(int position){
+        Node ptr = head;
+        int pos = 1;
+        while(pos < position-1)
+            ptr = ptr.link;
+        ptr.link = ptr.link.link;
+    }
+    
     
     static void insertAtFront(int valueToBeInserted){
         Node newNode = new Node(valueToBeInserted);
@@ -104,7 +172,7 @@ class LinkedList{
         Node ptr = head;
         Node newNode = new Node(insertAtPosition);
         int tempPos=1;
-        while(tempPos < position){
+        while(tempPos < position-1){
             ptr = ptr.link;
             tempPos++;
         }
