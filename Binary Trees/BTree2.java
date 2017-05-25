@@ -35,7 +35,7 @@ class BTree{
         preOrderTraversal(rootNode);
         System.out.println("\npostOrderTraversal");
         postOrderTraversal(rootNode);
-    }
+    } 
     
     static Node createBTree(int size){
         Queue<Node> que = new LinkedList<Node>();
