@@ -35,7 +35,7 @@ class BTree{
             System.out.println("both the trees are same");
         else
             System.out.println("both are different");
-            
+             
             
         /*third case*/
         System.out.println("\nthird case");
