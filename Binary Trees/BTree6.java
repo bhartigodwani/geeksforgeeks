@@ -1,3 +1,6 @@
+/*deletion of tree can be best done by postorder traversal 
+because we dont need to take any intermediate memory to save any node's data*/
+
 import java.util.Queue;
 import java.util.LinkedList;
 class BTree{
