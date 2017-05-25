@@ -32,7 +32,7 @@ class BTree{
         int value = 1;
         Node rootNode = new Node(value);
         que.add(rootNode);
-        while(value < size){
+        while(value < size){ 
             Node node = que.poll();
             Node leftChild = new Node(++value);
             Node rightChild = new Node(++value);
