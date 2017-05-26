@@ -13,11 +13,16 @@ class Graph{
     
     public static void main (String[] args) {
         int numberOfVertices = 5;
-        Node [] list = createGraph(numberOfVertices);//create complete graph of numberOfVertices size
+        System.out.println("complete graph of 5 vertices(0-4)");
+        Node [] list = createAdjacencyList(numberOfVertices);//create adjacency list for complete graph
+        displayGraphEdges(list);
+        
+        System.out.println("\na non cmplete graph of 5 vertices(0-4)");
+        list = createAdjacencyList2(numberOfVertices);
         displayGraphEdges(list);
    }
    
-   static Node[] createGraph(int numberOfVertices){
+   static Node[] createAdjacencyList(int numberOfVertices){
        Node []list = new Node[numberOfVertices];
         for (int i=0; i<numberOfVertices; i++){
             list[i] = new Node();
@@ -31,6 +36,29 @@ class Graph{
         }
         return list;
    }
+   
+   
+   static Node[] createAdjacencyList2(int numberOfVertices){
+        Node []list = new Node[numberOfVertices];
+        for (int i=0; i<numberOfVertices; i++){
+            list[i] = new Node();
+            Node temp = list[i];
+            int value = 0;
+            if(i < numberOfVertices-2){
+                    temp.link = new Node(i+1);
+                    temp = temp.link;
+                    temp.link = new Node(i+2);
+                }
+            
+            else{
+                    temp.link = new Node(i-1);
+                    temp = temp.link;
+                    temp.link = new Node(i-2);
+            }
+        }
+        return list;
+   }
+   
    
    static void displayGraphEdges(Node list[]){
        System.out.println("adjacency list : ");
