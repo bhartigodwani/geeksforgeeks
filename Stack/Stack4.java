@@ -5,6 +5,9 @@ Given an expression string exp , write a program to examine whether the pairs an
 and false for exp = “[(])”
 */
 
+/*two approaches*/
+
+/*----------------------------------------first approach---------------------------------*/
 import java.util.Scanner;
 class Stack{
     static int top = -1, maxSize;
@@ -64,5 +67,38 @@ class Stack{
             top--;    
             return true;
         }
+    }
+}
+
+/*----------------------------------------second approach---------------------------------*/
+import java.util.Stack;
+class Stack4{
+    public static void main (String[] args) {
+        Stack<Character> stack = new Stack<Character>();
+        String expression = "({[]})";
+        int flag = 0;//expression is considered to balanced initially as no check is applied till now
+        for (int i=0; i<expression.length(); i++){
+            if (expression.charAt(i) == '(' || expression.charAt(i) == '{' || expression.charAt(i) == '[')
+                stack.push(expression.charAt(i));
+            
+            else if(!stack.isEmpty() && expression.charAt(i) == ')' && stack.peek().equals('('))
+                stack.pop();
+            
+            else if(!stack.isEmpty() && expression.charAt(i) == '}' && stack.peek().equals('{'))
+                stack.pop();
+            
+            else if(!stack.isEmpty() && expression.charAt(i) == ']' && stack.peek().equals('['))
+                stack.pop();
+                
+            else if(stack.isEmpty() && (expression.charAt(i) == ')' || expression.charAt(i) == '}' || expression.charAt(i) == ']')){
+                System.out.println("unbalanced expression");
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0 && !stack.isEmpty())
+            System.out.println("unbalanced expression");
+        if(flag == 0 && stack.isEmpty())
+            System.out.println("balanced expression");
     }
 }
