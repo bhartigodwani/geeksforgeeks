@@ -1,4 +1,6 @@
 /*reverse string using stack*/
+/*two approaches are provided*/
+/*---------------------------------first approach---------------------------*/
 import java.util.Scanner;
 class ReverseStack{
     public static void main (String[] args) {
@@ -66,4 +68,19 @@ class Stack
 	   return false;
 	}
 } 
- 
+
+
+/*---------------------------------second approach---------------------------*/
+import java.util.Stack;
+class StackReverse{
+    public static void main (String[] args) {
+        Stack stack = new Stack();
+        String str = "GeeksQuiz";
+        System.out.println("given string is = "+str);
+        for(int i=0; i<str.length(); i++)
+            stack.push(str.charAt(i));
+        
+        for(int i=0;i<str.length(); i++)
+            System.out.print(stack.pop()+"");
+    }
+}
