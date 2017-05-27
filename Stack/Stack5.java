@@ -20,7 +20,9 @@ d) For the input array [13, 7, 6, 12}, the next greater elements for each elemen
    6       -->     12
    12     -->     -1
  */
+/*--------------------------------------two solutions------------------------------------*/
 
+/*--------------------------------------first solution------------------------------------*/
 import java.util.Scanner;
 import java.util.HashMap;
 class Stack{
@@ -73,5 +75,37 @@ class Stack{
             top--;
         else
             System.out.println("stack is empty");
+    }
+}
+
+/*--------------------------------------second solution------------------------------------*/
+import java.util.Stack;
+import java.util.Arrays;
+
+class Stack5{
+    public static void main (String[] args) {
+        Stack<Integer> stack = new Stack<Integer>();
+        //Scanner sc = new Scanner(System.in);
+        //int n = sc.nextInt();
+        //Integer arr[] = new Integer[n];
+        int n = 5;
+        Integer arr[] = {4,5,2,25,7};
+        System.out.println("given array is = "+Arrays.toString(arr));
+        Integer nextGreater[] = new Integer[n];
+        for (int i=0; i<n; i++)
+            nextGreater[i] = -1;
+        stack.push(arr[0]);
+        System.out.println("nextGreater element of given numbers is :");
+        for (int i=1; i<n; i++){
+             while(!stack.isEmpty() && arr[i] > stack.peek()){
+                int temp = stack.pop();
+                nextGreater[Arrays.asList(arr).indexOf(temp)] = arr[i];
+            }
+            stack.push(arr[i]);
+        } 
+        
+        for (int i=0; i<n; i++)
+            System.out.println(arr[i]+" = "+nextGreater[i]);
+        
     }
 }
