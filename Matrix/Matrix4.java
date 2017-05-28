@@ -35,7 +35,7 @@ class Matrix4{
             for (int column=0; column<columns; column++){
                 matrix[row][column] = sc.nextInt();
                 System.out.print(matrix[row][column]+"  ");
-            } 
+            }  
             System.out.println();
         }
         
