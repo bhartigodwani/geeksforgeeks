@@ -11,6 +11,11 @@ Output:
 	0 1 0 0 1 
 	1 0 1 1 0 
 	1 1 1 0 0 
+Solution:
+	corresponding every row make a list which consists column values having value = 1.(in above example for first row
+	list = [1,4])
+	for every row list if the value in the map != list then print the row, else dont print. 
+	Complexity : O(rows*columns)
 */
 
 import java.util.Scanner;
