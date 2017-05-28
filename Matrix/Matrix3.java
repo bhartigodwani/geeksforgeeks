@@ -31,7 +31,7 @@ class Matrix3{
         int rows = sc.nextInt();
         int columns = sc.nextInt();
         int [][]matrix = new int[rows][columns];
-        
+         
         System.out.println("\nGiven matrix is ");
         for (int row=0; row<rows; row++){
             for (int column=0; column<columns; column++){
