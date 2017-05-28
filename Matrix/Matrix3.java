@@ -35,7 +35,7 @@ class Matrix3{
             } 
             System.out.println();
         }
-        
+         
         System.out.println("\nUnique rows :");
         Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
         for (int row=0; row<rows; row++){
