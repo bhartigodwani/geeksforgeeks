@@ -11,14 +11,14 @@ This solution requires modifications to basic linked list data structure.  Have 
 with each node.  Traverse the linked list and keep marking visited nodes.  If you see a visited
 node again then there is a loop. This solution works in O(n) but requires additional information
 with each node.
-A variation of this solution that doesn’t require modification to basic data structure can be
+A variation of this solution that doesn't require modification to basic data structure can be
 implemented using hash.  Just store the addresses of visited nodes in a hash and if you see an 
 address that already exists in hash then there is a loop.
 
-3. Floyd’s Cycle-Finding Algorithm:
+3. Floyd's Cycle-Finding Algorithm:
 This is the fastest method. Traverse linked list using two pointers.  Move one pointer by one and 
 other pointer by two.  If these pointers meet at some node then there is a loop.  If pointers do 
-not meet then linked list doesn’t have loop.
+not meet then linked list doesn't have loop.
 */
 class LinkedList{
     static class Node{
@@ -32,7 +32,8 @@ class LinkedList{
         }
     }
     public static void main (String[] args) {
-        /*-------------------------------using marked visite-------------------------*/
+        /*-------------------------------using marked visit-------------------------*/
+        System.out.println("Using marked visit : \n");
         /*-------------------------------case 1---------------------------------------*/
         System.out.println("case 1");
         int size = 7;
@@ -82,6 +83,7 @@ class LinkedList{
             
     
         /*-------------------------------using floyd cycle's algorithm-------------------------*/
+        System.out.println("\nUsing floyd cycle's algorithm : \n");
         /*-------------------------------case 1---------------------------------------*/
         System.out.println("case 1");
         size = 7;
