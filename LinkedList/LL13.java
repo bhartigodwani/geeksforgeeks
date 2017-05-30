@@ -55,8 +55,56 @@ class LinkedList{
         if(ifLoop == true)
             System.out.println("loop exist");
         else
-            System.out.println("loop doesnot exist");    
+            System.out.println("loop doesnot exist");
+            
+            
+    
+        /*-------------------------------using floyd cycle's algorithm-------------------------*/
+        /*-------------------------------case 1---------------------------------------*/
+        System.out.println("case 1");
+        size = 7;
+        head = new Node(1);
+        for (int i=2; i<=size; i++)
+            head = createNode(i,head);
+        ifLoop = findLoopFloyd(head);
+        if(ifLoop == true)
+            System.out.println("loop exist");
+        else
+            System.out.println("loop doesnot exist");
+            
+        /*-------------------------------case 2---------------------------------------*/
+        /*------------------------------------only one node exist----------------------*/
+        System.out.println("case 2");
+        size = 1;
+        head = new Node(1);
+        for (int i=2; i<=size; i++)
+            head = createNode(i,head);
+        ifLoop = findLoopFloyd(head);
+        if(ifLoop == true)
+            System.out.println("loop exist");
+        else
+            System.out.println("loop doesnot exist");
+            
+        /*-------------------------------case 3---------------------------------------*/
+        /*-------------------------------loop exist------------------------------------*/
+        System.out.println("case 3");
+        head = createLoopLinkedList();
+        ifLoop = findLoopFloyd(head);
+        if(ifLoop == true)
+            System.out.println("loop exist");
+        else
+            System.out.println("loop doesnot exist");
         
+        
+        /*-------------------------------case 4---------------------------------------*/
+        /*-------------------------------empty LinkedList-----------------------------*/
+        System.out.println("case 4");
+        head = null;
+        ifLoop = findLoopFloyd(head);
+        if(ifLoop == true)
+            System.out.println("loop exist");
+        else
+            System.out.println("loop doesnot exist");        
     }
     
     static Node createNode(int value, Node head){
@@ -84,6 +132,24 @@ class LinkedList{
                 return false;
         }
     }
+    
+    static boolean findLoopFloyd(Node head){
+        if (head.link != null){ 
+            Node ptr1 = head;
+            Node ptr2 = head;
+            while(ptr2.link != null || ptr1 != ptr2){
+                ptr1 = ptr1.link;
+                ptr2 = ptr2.link.link;
+            }
+            if(ptr2 == null)
+                return false;
+            else if(ptr1 == ptr2)
+                return true;
+        }
+    
+        return false;
+    }
+    
     
     static Node createLoopLinkedList(){
         Node head = new Node(1);
