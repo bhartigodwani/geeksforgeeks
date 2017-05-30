@@ -1,3 +1,25 @@
+/*
+Write a program function to detect loop in a linked list
+Solution:
+1. Use Hashing:
+Traverse the list one by one and keep putting the node addresses in a Hash Table. At any point, 
+if NULL is reached then return false and if next of current node points to any of the previously 
+stored nodes in Hash then return true.
+
+2. Mark Visited Nodes:
+This solution requires modifications to basic linked list data structure.  Have a visited flag 
+with each node.  Traverse the linked list and keep marking visited nodes.  If you see a visited
+node again then there is a loop. This solution works in O(n) but requires additional information
+with each node.
+A variation of this solution that doesn’t require modification to basic data structure can be
+implemented using hash.  Just store the addresses of visited nodes in a hash and if you see an 
+address that already exists in hash then there is a loop.
+
+3. Floyd’s Cycle-Finding Algorithm:
+This is the fastest method. Traverse linked list using two pointers.  Move one pointer by one and 
+other pointer by two.  If these pointers meet at some node then there is a loop.  If pointers do 
+not meet then linked list doesn’t have loop.
+*/
 class LinkedList{
     static class Node{
         int data;
@@ -134,19 +156,20 @@ class LinkedList{
     }
     
     static boolean findLoopFloyd(Node head){
+        if(head == null)
+            return false;
+            
         if (head.link != null){ 
             Node ptr1 = head;
             Node ptr2 = head;
-            while(ptr2.link != null || ptr1 != ptr2){
+            while(ptr2.link != null){
                 ptr1 = ptr1.link;
                 ptr2 = ptr2.link.link;
+                if(ptr1 == ptr2){
+                    return true;
+                }
             }
-            if(ptr2 == null)
-                return false;
-            else if(ptr1 == ptr2)
-                return true;
         }
-    
         return false;
     }
     
