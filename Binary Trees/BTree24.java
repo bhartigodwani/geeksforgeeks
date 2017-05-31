@@ -35,7 +35,7 @@ class BTree{
         int hLeft, hRight;
         hLeft = findHeight(rootNode.leftChild);
         hRight = findHeight(rootNode.rightChild);
-        
+         
         if(Math.abs(hRight - hLeft) == 1 || Math.abs(hRight - hLeft) == 0)
             System.out.println("tree is balanced");
         else
