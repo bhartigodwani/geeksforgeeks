@@ -36,7 +36,7 @@ class BTree{
         BFSTraversal(rootNode);
         System.out.println("\n\nBFS in spiral, line by line for second tree");
         spiralBFSPrint(rootNode);
-    }
+    } 
     
     static Node createBTree(int size){
         Queue<Node> que = new LinkedList<Node>();
