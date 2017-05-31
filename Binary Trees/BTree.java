@@ -24,3 +24,4 @@ class Tree{
         System.out.println("\t"+rootNode.leftChild.leftChild.data);
     }
 }
+ 
