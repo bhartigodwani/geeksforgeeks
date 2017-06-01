@@ -88,43 +88,24 @@ class BTree{
         BFSTraversalLineByLine(rootNode);
     }
     
-    static Node in_Pre_Order(Integer [] inorder, Integer[] preorder){
-        Node rootNode = new Node(preorder[0]);
-        for (int i=1; i<preorder.length; i++){
-            rootNode = buildTree(rootNode, preorder[i], inorder);
-        } 
-        return rootNode;
-    }
-    
-    static Node in_Post_Order(Integer [] inorder, Integer[] postorder){
-        Node rootNode = new Node(postorder[postorder.length-1]);
-        for (int i=postorder.length-2; i >= 0; i--){
-            rootNode = buildTree(rootNode, postorder[i], inorder);
-        } 
-        return rootNode;
-    }
-    
-    static Node buildTree(Node rootNode, int element, Integer []inorder){
-        List inorderList = Arrays.asList(inorder);
-        Node newNode = new Node(element);
-        Node temp = rootNode;
-        while(true){
-            if(inorderList.indexOf(element) < inorderList.indexOf(temp.data)){
-                if(temp.leftChild != null)
-                    temp = temp.leftChild;
-                else{
-                    temp.leftChild = newNode;
-                    break;
-                }
+    static Node convertTree2DoubleTree(Node rootNode){
+        Queue<Node> que = new LinkedList<Node>();
+        que.add(rootNode);
+        while(!que.isEmpty()){
+            Node node = que.poll();
+            
+            if (node.leftChild != null){
+                que.add(node.leftChild);
             }
-            else{
-                if(temp.rightChild != null)
-                    temp = temp.rightChild;
-                else{
-                    temp.rightChild = newNode;
-                    break;
-                }
+                
+            if(node.rightChild != null){
+                que.add(node.rightChild);
             }
+            
+            Node newNode = new Node(node.data);
+            Node tempLeft = node.leftChild;
+            node.leftChild = newNode;
+            newNode.leftChild = tempLeft;
         }
         return rootNode;
     }
@@ -180,28 +161,6 @@ class BTree{
         return rootNode;
     }
         
-    static Node convertTree2DoubleTree(Node rootNode){
-        Queue<Node> que = new LinkedList<Node>();
-        que.add(rootNode);
-        while(!que.isEmpty()){
-            Node node = que.poll();
-            
-            if (node.leftChild != null){
-                que.add(node.leftChild);
-            }
-                
-            if(node.rightChild != null){
-                que.add(node.rightChild);
-            }
-            
-            Node newNode = new Node(node.data);
-            Node tempLeft = node.leftChild;
-            node.leftChild = newNode;
-            newNode.leftChild = tempLeft;
-        }
-        return rootNode;
-    }
-    
     static void BFSTraversalLineByLine(Node rootNode){
         int height = findHeight(rootNode);
         /*print node level wise*/
