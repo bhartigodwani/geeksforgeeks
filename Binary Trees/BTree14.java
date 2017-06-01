@@ -1,4 +1,13 @@
 /*
+Construct Tree from given Inorder and Preorder traversals
+Algorithm: buildTree()
+1) Pick an element from Preorder. Increment a Preorder Index Variable (preIndex in below code) to pick next element in 
+next recursive call.
+2) Create a new tree node tNode with the data as picked element.
+3) Find the picked element’s index in Inorder. Let the index be inIndex.
+4) Call buildTree for elements before inIndex and make the built tree as left subtree of tNode.
+5) Call buildTree for elements after inIndex and make the built tree as right subtree of tNode.
+6) return tNode.
 */
 
 import java.util.Stack;
@@ -18,65 +27,96 @@ class BTree{
     }
     
     public static void main (String[] args) {
-        int [] inorder = {7,3,6,1,5,2,4};
-        int [] preorder = {1,3,7,6,2,5,4};
-        int [] postorder = {7,6,3,5,4,2,1};
         
+        /*--------------------case 1------------------------------*/
+        Integer [] inorder1 = {4,2,5,1,6,3,7};
+        Integer [] preorder1 = {1,2,4,5,3,6,7};
+        Integer [] postorder1 = {4,5,2,6,7,3,1};
         int size = 7;
         Node rootNode = createBTree(size);
-        System.out.println("First tree");
-        displayBTree(rootNode);
-        System.out.println("\nTree made by Inorder and Preorder");
-        rootNode = preInorderGiven(inorder, preorder);
+        System.out.println("First original tree");
+        BFSTraversalLineByLine(rootNode);
+        System.out.println("tree made by inorder and preorder");
+        rootNode = in_Pre_Order(inorder1, preorder1);
+        BFSTraversalLineByLine(rootNode);
+        System.out.println("tree made by inorder and postorder");
+        rootNode = in_Post_Order(inorder1,postorder1);
         BFSTraversalLineByLine(rootNode);
         
-        /*System.out.println("\nTree made by Inorder and Postorder");
-        rootNode = postInOrderGiven(inorder, postorder);
-        BFSTraversalLineByLine(rootNode);*/
         
+        /*--------------------case 2------------------------------*/
+        Integer []inorder2 = {4,2,1,6,7,3};
+        Integer []preorder2 = {1,2,4,3,6,7};
+        Integer []postorder2 = {4,2,7,6,3,1};
         System.out.println("\n");
-        rootNode = createBTree(size);
+        rootNode = createBTree2();
         System.out.println("Second tree");
-        displayBTree(rootNode);
-        System.out.println("\nTree made by Inorder and Preorder");
-        rootNode = preInorderGiven(inorder, preorder);
+        BFSTraversalLineByLine(rootNode);
+        System.out.println("tree made by inorder and preorder");
+        rootNode = in_Pre_Order(inorder2, preorder2);
+        BFSTraversalLineByLine(rootNode);
+        System.out.println("tree made by inorder and postorder");
+        rootNode = in_Post_Order(inorder2,postorder2);
+        BFSTraversalLineByLine(rootNode);
+            
+        /*--------------------case 3------------------------------*/
+        Integer []inorder3 = {5,4,3,2,1};
+        Integer []preorder3 = {1,2,3,4,5};
+        Integer []postorder3 = {5,4,3,2,1};
+        System.out.println("\n");
+        rootNode = createBTree3();
+        System.out.println("Third tree");
+        BFSTraversalLineByLine(rootNode);
+        System.out.println("tree made by inorder and preorder");
+        rootNode = in_Pre_Order(inorder3, preorder3);
+        BFSTraversalLineByLine(rootNode);
+        System.out.println("tree made by inorder and postorder");
+        rootNode = in_Post_Order(inorder3,postorder3);
         BFSTraversalLineByLine(rootNode);
         
-        /*System.out.println("\nTree made by Inorder and Postorder");
-        rootNode = postInOrderGiven(inorder, postorder);
-        BFSTraversalLineByLine(rootNode);*/
     }
     
-    static Node preInorderGiven(int []inorder, int []preorder){
-        Integer []in = new Integer[inorder.length];
-        Integer []pre = new Integer[preorder.length];
-        for (int i=0; i<inorder.length; i++){
-            in[i] = inorder[i];
-            pre[i] = preorder[i];
-        } 
+    static Node in_Pre_Order(Integer [] inorder, Integer[] preorder){
         Node rootNode = new Node(preorder[0]);
-        List inList = Arrays.asList(in);
-        List preList = Arrays.asList(pre);
-        int i=1;
-    
-        List list = Arrays.asList(new Character[] { 'm', 'e', 'y' });
-        System.out.println(list.indexOf('e'));
-        
-        while(i < pre.length){
-            Node newNode = new Node(pre[i]);
-            Node temp = rootNode;
-            while(true){
-                if(temp.leftChild != null && inList.indexOf(pre[i]) < inList.indexOf(temp.data)){
-                    temp = temp.leftChild;
-                }
-            }
-            while(temp.leftChild != null && temp.rightChild != null)
-        }
-        
+        for (int i=1; i<preorder.length; i++){
+            rootNode = buildTree(rootNode, preorder[i], inorder);
+        } 
         return rootNode;
     }
-
-
+    
+    static Node in_Post_Order(Integer [] inorder, Integer[] postorder){
+        Node rootNode = new Node(postorder[postorder.length-1]);
+        for (int i=postorder.length-2; i >= 0; i--){
+            rootNode = buildTree(rootNode, postorder[i], inorder);
+        } 
+        return rootNode;
+    }
+    
+    static Node buildTree(Node rootNode, int element, Integer []inorder){
+        List inorderList = Arrays.asList(inorder);
+        Node newNode = new Node(element);
+        Node temp = rootNode;
+        while(true){
+            if(inorderList.indexOf(element) < inorderList.indexOf(temp.data)){
+                if(temp.leftChild != null)
+                    temp = temp.leftChild;
+                else{
+                    temp.leftChild = newNode;
+                    break;
+                }
+            }
+            else{
+                if(temp.rightChild != null)
+                    temp = temp.rightChild;
+                else{
+                    temp.rightChild = newNode;
+                    break;
+                }
+            }
+        }
+        return rootNode;
+    }
+    
     static Node createBTree(int size){
         Queue<Node> que = new LinkedList<Node>();
         int value = 1;
@@ -111,6 +151,22 @@ class BTree{
         
         return rootNode;
     }
+    
+    static Node createBTree3(){
+        Node rootNode = new Node(1);
+        Node two = new Node(2);
+        Node three = new Node(3);
+        Node four = new Node(4);
+        Node five = new Node(5);
+        Node six = new Node(6);
+        Node seven = new Node(7);
+        
+        rootNode.leftChild = two;
+        two.leftChild = three;
+        three.leftChild = four;
+        four.leftChild = five;
+        return rootNode;
+    }
         
     static void displayBTree(Node rootNode){
         System.out.println(rootNode.data);
@@ -139,7 +195,7 @@ class BTree{
         }
     }
     
-     static int findHeight(Node node){
+    static int findHeight(Node node){
         if (node == null)
             return 0;
         if(node.leftChild == null && node.rightChild == null)
