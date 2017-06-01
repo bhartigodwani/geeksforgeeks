@@ -34,7 +34,7 @@ Consider the below trees:
    
 Method 1 (Change Left subtree to its Mirror and compare it with Right subtree)
 Algorithm: isFoldable(root)
- 
+  
 1) If tree is empty, then return true.
 2) Convert the left subtree to its mirror image
     mirror(root->left); 
