@@ -1,39 +1,40 @@
-/*
-Toggle case of a string using Bitwise operators
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Arrays;
 
-Given a string, write a function that returns toggle case of a string using the bitwise operators in place.
-In ASCII codes character ‘A’ is integer 65 = (0100 0001)2, while character ‘a’ is integer 97 = (0110 0001)2.
-The difference between the ASCII values of ‘a’ and ‘A’ is 32.
-So we can easily change the case of the letters either from Upper to lower or lower to upper by adding or subtracting the 
-difference from the letters.
-
-Examples:
-
-Input : "GeekSfOrgEEKs"
-Output : "gEEKsFoRGeekS"                  
-
-Input : "StRinG"
-Output : "sTrINg"
-*/
 class String4{
     public static void main(String[] args){
-        String str = "geeKsforGeekS";
+        String str = "geeksforgeeks";
         System.out.println("string = "+str);
         
-        /*--------------------------case 1---------------------------------*/
-        System.out.println("case 1");
-        String strMain = "";
+        /*---------------------------------approach 1---------------------------------*/
+        /*---------------------------------by sorting---------------------------------*/
+        char ch[] = str.toCharArray();
+        Arrays.sort(ch);
+        int c1=0, c2=0;
+        for (int i=0; i<ch.length; i++){
+            if()
+        } 
+        System.out.println("string  = "+String.valueOf(ch));
+        
+        HashMap<Character, Integer> map = new HashMap<Character,Integer>();
+        
         for (int i=0; i<str.length(); i++){
-            int temp; 
-            if((int)str.charAt(i) >= 97 && (int)str.charAt(i) <= 123){
-                strMain = strMain + (char)(str.charAt(i)-32);
-            }
-            else{
-                strMain = strMain + (char)(str.charAt(i)+32);
+            map.put(str.charAt(i), (map.containsKey(str.charAt(i)) == true ? map.get(str.charAt(i)) + 1 : 1));    
+        } 
+        
+        Iterator it = map.entrySet().iterator();
+        Integer max = Integer.MIN_VALUE;
+        Character maxElement = null;
+        while(it.hasNext()){
+            Map.Entry pair = (Map.Entry)it.next();
+            if(max < (Integer)pair.getValue() && max!=Integer.MIN_VALUE){
+                max = (Integer)pair.getValue();
+                maxElement = (Character)pair.getKey();
             }
         }
-        System.out.println("toggled string = "+strMain);
         
-        
+        System.out.println("maxElement = "+maxElement+"     maxCount = "+(maxElement == null ? 0 : max));
     }
-} 
+}
