@@ -31,7 +31,7 @@ class LinkedList{
             System.out.println("not identical");
         
     }
-
+ 
     static boolean areEqual(Node h1, Node h2){
         Node t1 = h1;
         Node t2 = h2;
