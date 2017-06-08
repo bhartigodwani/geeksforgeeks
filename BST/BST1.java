@@ -1,31 +1,160 @@
-import java.util.Arrays;
+/*
+Binary Search Tree | Set 1 (Search and Insertion)
+Binary Search Tree, is a node-based binary tree data structure which has the following properties:
+    The left subtree of a node contains only nodes with keys less than the node’s key.
+    The right subtree of a node contains only nodes with keys greater than the node’s key.
+    The left and right subtree each must also be a binary search tree.
+    There must be no duplicate nodes.
+*/
+
+import java.util.Queue;
+import java.util.LinkedList;
 class BST{
     static class Node{
         int data;
-        Node leftChild;
-        Node rightChild;
+        Node left, right;
         Node(int d){
             data = d;
-            leftChild = rightChild = null;
+            left = right = null;
+        }
+    }
+    public static void main(String []args){
+        /*first tree*/
+        System.out.println("first tree");
+        int size = 7;//number of nodes in complete tree
+        Node rootNode = createBTree(size);
+        BFSTraversalLineByLine(rootNode);
+        int x;
+        boolean result;
+        x = 5;
+        System.out.println("x = "+x);
+        result = searchInBST(rootNode, x);
+        System.out.println((result == true) ? "true" : "false");
+        
+        x = 8;
+        System.out.println("x = "+x);
+        result = searchInBST(rootNode, x);
+        System.out.println((result == true) ? "true" : "false");
+        
+        System.out.println("\nnode to be inserted is "+x);
+        System.out.println("new tree");
+        insertNodeBST(rootNode, x);
+        BFSTraversalLineByLine(rootNode);
+        
+        /*second tree*/
+        rootNode = createBTree2();
+        System.out.println("\n\nsecond tree");
+        BFSTraversalLineByLine(rootNode);
+        x = 14;
+        System.out.println("x = "+x);
+        result = searchInBST(rootNode, x);
+        System.out.println((result == true) ? "true" : "false");
+        
+        x = 15;
+        System.out.println("x = "+x);
+        result = searchInBST(rootNode, x);
+        System.out.println((result == true) ? "true" : "false");
+        
+        System.out.println("\nnode to be inserted is "+x);
+        System.out.println("new tree");
+        insertNodeBST(rootNode, 9);
+        BFSTraversalLineByLine(rootNode);
+    }
+    
+    static boolean searchInBST(Node root, int x){
+        if(root == null)
+            return false;
+        if(root.data == x)
+            return true;
+        if(x < root.data)
+            return searchInBST(root.left, x);
+        else
+            return searchInBST(root.right, x);
+    }
+    
+    static void insertNodeBST(Node root, int x){
+        if(x < root.data){
+            if(root.left == null){
+                root.left = new Node(x);
+                return;
+            }
+            else
+                insertNodeBST(root.left, x);
+        }
+        
+        else{
+            if(root.right == null){
+                root.right = new Node(x);
+                return;
+            }
+            else
+                insertNodeBST(root.right, x);
         }
     }
     
-    public static void main (String[] args) {
-        int elements[] = {4,2,5,1,6,3,7};
-        System.out.println("elements to inserted in the BST : "+Arrays.toString(elements));
-        Node rootNode = null;
-        rootNode = insertNodeBST(rootNode,elements[0]);
-        for (int i=0; i<elements.length; i++){
-            addNodeBST(rootNode,elements[i]);    
-        } 
+    static Node createBTree(int size){
+        Node root = new Node(4);
+        Node o1 = new Node(2);
+        Node o2 = new Node(5);
+        Node o3 = new Node(1);
+        Node o4 = new Node(3);
+        Node o5 = new Node(6);
+        Node o6 = new Node(7);
         
-        )
+        root.left = o1;
+        root.right = o2;
+        o1.left = o3;
+        o1.left = o3;
+        o1.right = o4;
+        o2.right = o5;
+        o5.right = o6;
+        
+        return root;
     }
     
-    static Node insertNodeBST(Node rootNode, int element){
-        if (rootNode == null)
-            return new Node(element);
-        if (rootNode.leftChild < rootNode) 
+    static Node createBTree2(){
+        Node root = new Node(10);
+        Node o1 = new Node(8);
+        Node o2 = new Node(12);
+        Node o3 = new Node(7);
+        Node o4 = new Node(9);
+        Node o5 = new Node(14);
+        Node o6 = new Node(18);
         
+        root.left = o1;
+        root.right = o2;
+        o1.left = o3;
+        o1.right = o4;
+        o2.right = o5;
+        o5.right = o6;
+        
+        return root;
+    }
+    
+    static void BFSTraversalLineByLine(Node root){
+        if(root == null)
+            System.out.println("null");
+        
+        Queue<Node> que = new LinkedList<Node>();
+        que.add(root);
+        que.add(null);
+        while(!que.isEmpty()){
+            Node node = que.poll();
+            if(node == null){
+                System.out.println();
+                if(!que.isEmpty())
+                    que.add(null);
+            }
+            else{
+                System.out.print(node.data+"  ");
+                Node left = node.left;
+                Node right = node.right;
+                if (left != null)
+                    que.add(left);
+
+                if(right != null)
+                    que.add(right);
+            }
+        }
     }
 }
