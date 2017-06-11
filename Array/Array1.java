@@ -35,7 +35,7 @@ public class Array1 {
 			} 
 			else{
 				r--;
-				System.out.println("l");
+				System.out.println("l"); 
 			}	
 		}
 		
