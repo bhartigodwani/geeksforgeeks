@@ -35,7 +35,7 @@ class Array{
                 left = i;
                 break;    
             }
-        }
+        } 
         
         for(int i=arr.length-1; i>right; i--){
             if(arr[i] < max && f2 == 0){
