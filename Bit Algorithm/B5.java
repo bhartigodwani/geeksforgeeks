@@ -1,22 +1,26 @@
+//@author Bharti Godwani
 /*
-Detect if two integers have opposite signs
-Given two signed integers, write a function that returns true if the signs of given integers 
-are different, otherwise false. For example, the function should return true -1 and +100, 
-and should return false for -100 and -200. 
-The function should not use any of the arithmetic operators.
+Add two numbers without using arithmetic operators
+Write a function Add() that returns sum of two integers. The function should not use any of the arithmetic operators (+, ++, –, -, .. etc).
+
+Sum of two bits can be obtained by performing XOR (^) of the two bits. Carry bit can be obtained by performing AND (&) of two bits.
+Above is simple Half Adder logic that can be used to add 2 single bits. We can extend this logic for integers. If x and y don’t have set bits at same position(s), then bitwise XOR (^) of x and y gives the sum of x and y. To incorporate common set bits also, bitwise AND (&) is used. Bitwise AND of x and y gives all carry bits. We calculate (x & y) << 1 and add it to x ^ y to get the required result.
 */
-class Solution{
-    public static void main (String[] args) {
-        int x=-100;
-        int y=1;
-        boolean result1 = ((x^y)<0);//Xor is negative if their signs are opposite 
-        boolean result2 = (x < 0)? (y >= 0): (y < 0);
-        int result3 = ((x ^ y) >> 31);
-        //System.out.println(result3);
-        
-        if (result1 == true && result2 == true && result3 == -1) 
-            System.out.println("signs are opposite");
-        else
-            System.out.println("signs are same");
+class Bits{
+    public static void main(String []args){
+        int x = 10, y = 15;
+        int tx, ty;
+        int sum = 0;
+        int carry = 0;
+        for(int i=0; i<32; i++){
+            tx = x >> i;//right shift so that we can add the LSBs every time
+            ty = y >> i;
+            tx = tx & 1;//to get the LSB
+            ty = ty & 1;   
+            sum = ((tx ^ ty ^ carry)<<i) | sum;//sum is obtained by xoring tx, ty and carry;
+            System.out.println("tx = "+tx+" ty = "+ty+" ca = "+carry+" sum = "+sum); 
+            carry = tx&y | ty&carry | carry&tx; // carry = xy + yc + cx;
+        }
+        System.out.println("sum = "+sum);
     }
 }
