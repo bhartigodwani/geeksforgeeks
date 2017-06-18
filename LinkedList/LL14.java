@@ -92,34 +92,42 @@ class LinkedList{
     static Node mergeList(Node head1, Node head2){
         if (head1 == null)
             return head2;
+        else if(head2 == null)
+            return head1;
         
-        Node ptr1 = head1, ptr2 = head2; 
-        while(ptr1.link != null && ptr2 != null){
-            if (ptr1.data < ptr2.data){
-                //insertNode(ptr1,ptr2);
-                Node temp = ptr2.link;
-                ptr2.link = ptr1.link;
-                ptr1.link = ptr2;
-                ptr2 = temp;
-                ptr1 = ptr1.link.link;
+        Node curr1, curr2, prev;
+        Node newHead;
+        if(head1.data < head2.data){
+            newHead = head1;
+            curr1 = head1.link;
+            prev = head1;
+            curr2 = head2;
+        }
+        
+        else{
+            newHead = head2;
+            curr1 = head2.link;
+            prev = head2;
+            curr2 = head1;
+        }
+        
+        while(curr1 != null && curr2 != null){
+            if(curr1.data < curr2.data){
+                curr1 = curr1.link;
+                prev = prev.link;
             }
             else{
-                int tempData = ptr1.data;
-                ptr1.data = ptr2.data;
-                ptr2.data = tempData;
-                //insertNode(ptr1,ptr2);
-                Node temp = ptr2.link;
-                ptr2.link = ptr1.link;
-                ptr1.link = ptr2;
-                ptr2 = temp;
-                ptr1 = ptr1.link.link;
+                Node temp = curr2.link;
+                prev.link = curr2;
+                curr2.link = curr1;
+                prev = curr2;
+                curr2 = temp;
             }
         }
-        if (ptr1.link == null){
-            ptr1.link = ptr2;
-        }
+        if(curr2 != null)
+            prev.link = curr2;
         
-        return head1;
+        return newHead;
     }
     
     static void insertNode(Node ptr1, Node ptr2){
