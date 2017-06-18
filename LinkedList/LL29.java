@@ -29,7 +29,7 @@ class LinkedList{
         
     }
 
-    static Node[] splitList(Node head){
+     static Node[] splitList(Node head){
         Node head1 = head;
         Node head2 = head.link;
         Node t1 = head1;
@@ -39,13 +39,16 @@ class LinkedList{
             t1 = t1.link;
             t2.link = t2.link.link;
             t2 = t2.link;
-            if(t2.link == null)
+            if(t2 == null)
+                break;
+            else if(t2.link == null)
                 t1.link = t1.link.link;
         }
         
         Node nodes[] = {head1, head2};
         return nodes;
     }
+    
     static Node createList(){
         Node head = new Node(1);
         Node two = new Node(2);
