@@ -33,7 +33,7 @@ class LL{
         last = insertNode(last, key);
         System.out.println("new Linked list");
         printLinkedList(last);
-        
+         
         key = 2;
         System.out.println("key = "+key);
         last = insertNode(last, key);
