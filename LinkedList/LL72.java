@@ -196,6 +196,7 @@ class LL{
         return null;
     }
     
+    /*-----------------------Circular Singly Linked List Traversal----------------*/
     static void printLinkedList(Node last){
         if (last == null)
             System.out.println("null");
