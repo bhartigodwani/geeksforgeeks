@@ -1,6 +1,11 @@
 /*
 @author Bharti Godwani
 Circular Singly Linked List | Insertion
+A node can be added in three ways:
+    Insertion in an empty list
+    Insertion at the beginning of the list
+    Insertion at the end of the list
+    Insertion in between the nodes
 */
 
 import java.util.Stack;
@@ -33,7 +38,7 @@ class LL{
         last = insertNode(last, key);
         System.out.println("new Linked list");
         printLinkedList(last);
-         
+        
         key = 2;
         System.out.println("key = "+key);
         last = insertNode(last, key);
@@ -66,9 +71,17 @@ class LL{
         last = insertNodeAtPosition(last, key, pos);
         System.out.println("new Linked list");
         printLinkedList(last);
+        
+        key = 7;
+        pos = 1;
+        System.out.println("key = "+key+" pos = "+pos);
+        last = insertNodeAtPosition(last, key, pos);
+        System.out.println("new Linked list");
+        printLinkedList(last);
        
    }
-       
+   
+   /*----------------------insert after last node-----------------------*/
    static Node insertNode(Node last, int key){
        if(last == null){
            Node newNode = new Node(key);
@@ -83,6 +96,7 @@ class LL{
        return last;
    }
    
+    /*----------------------insert at perticular position after last node-----------------------*/
     static Node insertNodeAtPosition(Node last, int key, int pos){
         if(last == null){
            if(pos == 1){
@@ -92,26 +106,36 @@ class LL{
            }
            else
                System.out.println("insertion at position = "+pos+" is not possible");
-       }
+           
+           return last;
+        }
        else{
            Node newNode = new Node(key);
            Node temp = last;
-           int p = 1;
-           while(p < pos-1 && temp.link != last){
-               p++;
-               temp = temp.link;
-           }
-           newNode.link = temp.link;
-           temp.link = newNode;
-           
-           if(p == 1){
+           if(pos == 1){
+               while(temp.link != last)
+                   temp = temp.link;
+               
+               newNode.link = temp.link;
+               temp.link = newNode;
                last = newNode;
                return last;
            }
-           else if(p < pos && temp.link == last)
-                   System.out.println("insertion at position = "+pos+" is not possible");
-       }
+           else{
+               int p = 1;
+               while(p < pos-1 && temp.link != last){
+                   p++;
+                   temp = temp.link;
+               }
+               if(p < pos && temp.link == last){
+                    System.out.println("insertion at position = "+pos+" is not possible");
+                    return last;    
+               }
+               newNode.link = temp.link;
+               temp.link = newNode;
+           }
        return last;
+       }
     }
    
    static Node createList(){
@@ -185,13 +209,4 @@ class LL{
             System.out.println(temp.data+((temp.data!=last.data) ? " --> "+last.data : "")+"\n");
         }
     }
-    
-    /* static void printLinkedList(Node head){
-        Node traversePtr = head;
-        while(traversePtr != null){
-            System.out.print(traversePtr.data+" --> ");
-            traversePtr = traversePtr.link;
-        }
-        System.out.println("null"); 
-    }*/
 }
