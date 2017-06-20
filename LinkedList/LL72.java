@@ -138,64 +138,6 @@ class LL{
        }
     }
    
-   static Node createList(){
-        Node head = new Node(1);
-        Node two = new Node(-2);
-        Node three = new Node(-3);
-        Node four = new Node(4);
-        Node five = new Node(-5);
-        Node six = new Node(-2);
-        
-        head.link = two;
-        two.link = three;
-        three.link = four;
-        four.link = five;
-        five.link = six;
-        
-        return head;
-    }
-    
-    static Node createList2(){
-        Node head = new Node(-5);
-        Node two = new Node(-10);
-        Node three = new Node(-11);
-        Node four = new Node(3);
-        
-        head.link = two;
-        two.link = three;
-        three.link = four;
-        return head;
-    }
-    
-    static Node createList3(){
-        Node head = new Node(-5);
-        Node two = new Node(10);
-        Node three = new Node(-12);
-        Node four = new Node(13);
-        Node five = new Node(13);
-        Node six = new Node(14);
-        head.link = two;
-        two.link = three;
-        three.link = four;
-        four.link = five;
-        five.link = six;
-        
-        return head;
-    }
-    
-    static Node createList4(){
-        Node head = new Node(2);
-        Node two = new Node(3);
-        Node three = new Node(1);
-        //Node four = new Node(1);
-        
-        //head.link = two;
-        two.link = three;
-        //three.link = four;
-        
-        return null;
-    }
-    
     /*-----------------------Circular Singly Linked List Traversal----------------*/
     static void printLinkedList(Node last){
         if (last == null)
