@@ -35,7 +35,7 @@ class LL68{
         printLinkedList(h1);
         boolean result = isPallindrome(h1);
         System.out.println((result == true) ? "list is pallindrome" : "list is not a pallindrome");
-        
+         
         System.out.println("\ncase 2");
         Node h2 = createList2();
         System.out.println("h2 linked list");
