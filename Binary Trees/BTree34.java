@@ -3,8 +3,7 @@
 
 Connect nodes at same level
 
-Write a function to connect all the adjacent nodes at the same level in a binary tree. Structure of the given Binary Tree
-node is like following.
+Write a function to connect all the adjacent nodes at the same level in a binary tree. Structure of the given Binary Tree node is like following.
 struct node{
   int data;
   struct node* left;
@@ -12,8 +11,7 @@ struct node{
   struct node* nextRight;  
 }
 
-Initially, all the nextRight pointers point to garbage values. Your function should set these pointers to point next right
-for each node.
+Initially, all the nextRight pointers point to garbage values. Your function should set these pointers to point next right for each node.
 
 Example
 
@@ -50,15 +48,19 @@ class BTree{
         Node root = createBTree(size);
         System.out.println("original tree");
         BFSTraversalLineByLine(root);
-        root = connectSameLevel(root);
+        connectSameLevelBFS(root);
         System.out.println("updated tree");
+        BFSTraversalLineByLine(root);
+        root = createBTree(size);
+        System.out.println("updated tree through preorder");
+        connectSameLevelPreorder(root);
         BFSTraversalLineByLine(root);
         System.out.println();
         
         root = createBTree2();
         System.out.println("original tree");
         BFSTraversalLineByLine(root);
-        root = connectSameLevel(root);
+        connectSameLevelBFS(root);
         System.out.println("updated tree");
         BFSTraversalLineByLine(root);
         System.out.println();
@@ -67,14 +69,15 @@ class BTree{
         root.left = new Node(2);
         System.out.println("original tree");
         BFSTraversalLineByLine(root);
-        root = connectSameLevel(root);
+        connectSameLevelBFS(root);
         System.out.println("updated tree");
         BFSTraversalLineByLine(root);
     }
     
-    static Node connectSameLevel(Node root){
+    /*----------------------using BFS------------------------*/
+    static void connectSameLevelBFS(Node root){
         if(root == null)
-            return root;
+            return;
         
         Queue<Node> que = new LinkedList<Node>();
         que.add(root);
@@ -96,7 +99,23 @@ class BTree{
                 node.nextRight = que.peek();
             }
         }
+    }
+    
+    /*-----------------------------using Preorder-----------------------------*/
+    /*-----------------------------only for complete tree---------------------*/
+    static Node connectSameLevelPreorder(Node root){
+        root.nextRight = null;
+        connectSameLevelPreorderRec(root);
         return root;
+    }
+    
+    static void connectSameLevelPreorderRec(Node root){
+        if(root == null || root.left == null || root.right == null)
+            return;
+        root.left.nextRight = root.right;
+        root.right.nextRight = (root.nextRight != null) ? root.nextRight.left : null;
+        connectSameLevelPreorderRec(root.left);
+        connectSameLevelPreorderRec(root.right);
     }
     
     static Node createBTree2(){
