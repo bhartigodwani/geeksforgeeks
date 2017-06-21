@@ -34,7 +34,7 @@ class Array42{
         int index[] = new int[a.length];
         for(int i=0; i<a.length; i++){
             index[i] = i;    
-        }
+        } 
         System.out.println("array = "+Arrays.toString(a));
         System.out.println("index = "+Arrays.toString(index));
         
