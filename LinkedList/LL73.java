@@ -41,9 +41,7 @@ class LL{
    
    static Node[] splitCircularList(Node last){
        Node split[] = new Node[2];
-       System.out.println("1");
        if((last == null) || (last != null && last.link == null)){
-           System.out.println("base case");
            split[0] = last;
            split[1] = null;
            return split;
@@ -54,7 +52,6 @@ class LL{
        
        Node h1 = last; //slow pointer
        Node h2 = last.link; //fast pointer
-       System.out.println("before");
        while(h2.link != last && h2 != last){
            h1 = h1.link;
            h2 = h2.link.link;
@@ -68,8 +65,6 @@ class LL{
        
        h1.link = last;//making first list circular
        split[0] = last;
-       System.out.println("1 = "+split[0].data);
-       System.out.println("2 = "+split[1].data);
        return split;
    }
    
