@@ -11,6 +11,10 @@ Input:
 
 Output: 
 Bombay->Delhi, Delhi->Goa, Goa->Chennai, Chennai->Banglore,
+
+Solution:
+1. using topological sorting
+2. using hashing(below implementation)
 */
 
 import java.util.*;
