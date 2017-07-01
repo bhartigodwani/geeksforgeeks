@@ -22,11 +22,24 @@ class DP{
                 }
             }
         }
+        System.out.println("dp table");
         for(int i=0; i<a.length; i++){
             for(int j=0; j<=sum; j++){
                 System.out.print(dp[i][j]+" ");
             }
             System.out.println();
         }
+        String res = "";
+        int l = a.length-1;
+        int r = sum;
+        while(dp[l][r] != 0){
+            if(r-a[l] >= 0 && dp[l][r] == (dp[l][r-a[l]]+1)){
+                res = a[l] + " " + res;
+                r -= a[l];
+            }
+            else
+                l--;
+        }
+        System.out.println("coins required for the sum = "+res);
     }
 }
